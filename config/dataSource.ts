@@ -1,6 +1,6 @@
 import { registerAs } from "@nestjs/config";
 import { config as dotenvConfig } from "dotenv";
-import { join } from "path";
+import { join, resolve } from "path";
 import { DataSource, DataSourceOptions } from "typeorm";
 
 dotenvConfig({ path: ".env" });
@@ -15,8 +15,8 @@ const dataSourceOptions: DataSourceOptions = {
   database: process.env.DATABASE_NAME,
   synchronize: false,
   logging: false,
-  entities: [join(__dirname, "../src/**/*.entity.{js,ts}")],
-  migrations: [join(__dirname, "../migrations", "*.*")],
+  entities: [resolve(__dirname, "../src/**/*.entity.{js,ts}")],
+  migrations: [resolve(__dirname, "../migrations", "*.*")],
   migrationsTableName: "migrations",
   migrationsRun: process.env.MIGRATIONS_RUN === "true",
 };
