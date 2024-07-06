@@ -1,12 +1,13 @@
-import { GreenlyDataSource, dataSource } from "../../config/dataSource";
-import { CarbonEmissionFactor } from "./carbonEmissionFactor.entity";
+import {dataSource, GreenlyDataSource} from "../../config/dataSource";
+import {CarbonEmissionFactor} from "./carbonEmissionFactor.entity";
+import {Unit} from "../foodProduct/foodIngredient";
 
 let chickenEmissionFactor: CarbonEmissionFactor;
 beforeAll(async () => {
   await dataSource.initialize();
   chickenEmissionFactor = new CarbonEmissionFactor({
     emissionCO2eInKgPerUnit: 2.4,
-    unit: "kg",
+    unit: Unit.KG,
     name: "chicken",
     source: "Agrybalise",
   });
@@ -23,7 +24,7 @@ describe("FoodProductEntity", () => {
       expect(() => {
         const carbonEmissionFactor = new CarbonEmissionFactor({
           emissionCO2eInKgPerUnit: 2.4,
-          unit: "kg",
+          unit: Unit.KG,
           name: "chicken",
           source: "",
         });

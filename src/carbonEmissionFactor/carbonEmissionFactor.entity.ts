@@ -1,4 +1,5 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {Unit} from "../foodProduct/foodIngredient";
 
 @Entity("carbon_emission_factors")
 export class CarbonEmissionFactor extends BaseEntity {
@@ -13,7 +14,7 @@ export class CarbonEmissionFactor extends BaseEntity {
   @Column({
     nullable: false,
   })
-  unit: string;
+  unit: Unit;
 
   @Column({
     type: "float",
@@ -26,15 +27,9 @@ export class CarbonEmissionFactor extends BaseEntity {
   })
   source: string;
 
-  sanitize() {
-    if (this.source === "") {
-      throw new Error("Source cannot be empty");
-    }
-  }
-
   constructor(props: {
     name: string;
-    unit: string;
+    unit: Unit;
     emissionCO2eInKgPerUnit: number;
     source: string;
   }) {
@@ -44,6 +39,5 @@ export class CarbonEmissionFactor extends BaseEntity {
     this.unit = props?.unit;
     this.emissionCO2eInKgPerUnit = props?.emissionCO2eInKgPerUnit;
     this.source = props?.source;
-    this.sanitize();
   }
 }

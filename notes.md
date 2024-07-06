@@ -1,3 +1,7 @@
+## Linter and Prettier
+I usually use ESLint and Prettier.
+I skipped that steps to save a bit of time.
+
 ## Entities and Domain objects
 I usually separate them. 
 This allows to keep the code related to the queries and DB 

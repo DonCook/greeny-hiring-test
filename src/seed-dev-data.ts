@@ -1,5 +1,6 @@
 import { dataSource } from "../config/dataSource";
 import { CarbonEmissionFactor } from "./carbonEmissionFactor/carbonEmissionFactor.entity";
+import {Unit} from "./foodProduct/foodIngredient";
 
 export const TEST_CARBON_EMISSION_FACTORS = [
   {
@@ -53,13 +54,13 @@ export const TEST_CARBON_EMISSION_FACTORS = [
 ].map((args) => {
   return new CarbonEmissionFactor({
     name: args.name,
-    unit: args.unit,
+    unit: args.unit as Unit,
     emissionCO2eInKgPerUnit: args.emissionCO2eInKgPerUnit,
     source: args.source,
   });
 });
 
-export const getTestEmissionFactor = (name: string) => {
+export const getTestEmissionFactor = (name: string): CarbonEmissionFactor => {
   const emissionFactor = TEST_CARBON_EMISSION_FACTORS.find(
     (ef) => ef.name === name
   );
@@ -68,7 +69,7 @@ export const getTestEmissionFactor = (name: string) => {
       `test emission factor with name ${name} could not be found`
     );
   }
-  return emissionFactor;
+  return emissionFactor as CarbonEmissionFactor;
 };
 
 export const seedTestCarbonEmissionFactors = async () => {
